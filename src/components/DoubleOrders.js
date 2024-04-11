@@ -26,7 +26,7 @@ function DoubleOrders({ resultState, setResultState, fs }) {
 
   useEffect(() => {
     if (!file) setResults({ 1: { noDoubles: "Please Upload File" } });
-    if (typeof file === "string" && file.trim().length > 0) {
+    else if (typeof file === "string" && file.trim().length > 0) {
       const lines = file.split("\n").map((line) => line.split(","));
       lines.shift();
 

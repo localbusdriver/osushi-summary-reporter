@@ -33,7 +33,26 @@ function SummaryReporter({ resultState, setResultState, fs }) {
           if (final["Total Pieces"]) final["Total Pieces"] += pieces;
           else final["Total Pieces"] = pieces;
 
-          if (final[item]) {
+          if (item === "Mixed") {
+            if (!final["Chicken teriyaki"]) {
+              final["Chicken teriyaki"] = {
+                rolls: rolls / 2,
+                pieces: pieces / 2,
+              };
+            } else {
+              final["Chicken teriyaki"].rolls += rolls / 2;
+              final["Chicken teriyaki"].pieces += pieces / 2;
+            }
+            if (!final["Salmon & Avocado"]) {
+              final["Salmon & Avocado"] = {
+                rolls: rolls / 2,
+                pieces: pieces / 2,
+              };
+            } else {
+              final["Salmon & Avocado"].rolls += rolls / 2;
+              final["Salmon & Avocado"].pieces += pieces / 2;
+            }
+          } else if (final[item]) {
             final[item].rolls += rolls;
             final[item].pieces += pieces;
           } else {
