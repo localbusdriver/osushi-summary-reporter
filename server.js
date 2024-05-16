@@ -16,7 +16,7 @@ app.get("*", (req, res) => {
   res.sendFile(fullPath);
 });
 
-const PORT = 8080;
+const PORT = import.meta.env || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
