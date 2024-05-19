@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { FileUp, UserRound } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
+import { 
   Card,
   CardContent,
   CardHeader,
@@ -59,7 +59,7 @@ export default function DoubleOrders({ resultState, setResultState }) {
   }, [file]);
   
   return (
-    <div className="mt-5 flex">
+    <div className="mt-5 ">
       <div className="mx-auto flex flex-row justify-between items-center w-fit flex-wrap">
         <div className="md:w-1/2 mt-4 flex flex-col gap-4 text-left">
           <Label htmlFor="customFile" className="text-xl w-max flex flex-row md:pr-52">

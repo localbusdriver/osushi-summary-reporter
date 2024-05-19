@@ -76,76 +76,80 @@ export default function SummaryReporter({ resultState, setResultState }) {
   };
 
   return (
-    <div className="flex flex-row mx-auto justify-between items-center flex-wrap">
-      <div className="md:w-1/2 mt-8 flex flex-col text-left md:pl-96 gap-4">
-        <Label htmlFor="report" className="text-xl flex flex-row">
-          Paste the report
-        </Label>
-        <Textarea
-          type="text"
-          placeholder="Paste the report here"
-          id="report"
-          className="w-96"
-          onChange={(e) => setOrders(e.target.value)}
-        />
-        <div className="flex flex-row gap-2">
-          <Button onClick={(e) => handleSubmit(e)}>Submit</Button>
-          <Button
-            variant="destructive"
-            onClick={() => (document.getElementById("report").value = "")}
-          >
-            Clear
-          </Button>
+    <div className="mt-5">
+      <div className="mx-auto flex flex-row justify-between items-center flex-wrap ">
+        <div className="md:w-1/2 mt-4 flex flex-col items-center">
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="report" className="text-xl text-left">
+              Paste the report
+            </Label>
+            <Textarea
+              type="text"
+              placeholder="Paste the report here"
+              id="report"
+              className="w-80"
+              onChange={(e) => setOrders(e.target.value)}
+            />
+            <div className="flex flex-row gap-2">
+              <Button onClick={(e) => handleSubmit(e)}>Submit</Button>
+              <Button
+                variant="destructive"
+                onClick={() => (document.getElementById("report").value = "")}
+              >
+                Clear
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="md:w-1/2 mt-8 text-left">
-        <Table className="w-96 border border-black">
-          <TableCaption>Report Summary</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]" colSpan={2}>
-                Item
-              </TableHead>
-              <TableHead className="text-right">Rolls</TableHead>
-              <TableHead className="text-right">Pieces</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {results
-              ? Object.entries(results).map(([item, obj]) =>
-                  item !== "Total Rolls" && item !== "Total Pieces" ? (
-                    <TableRow key={item}>
-                      <TableCell className="font-medium" colSpan={2}>
-                        {item ? item : ""}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {obj.rolls ? Math.round(obj.rolls * 10) / 10 : ""}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {obj.pieces ? obj.pieces : ""}
-                      </TableCell>
-                    </TableRow>
-                  ) : (
-                    ""
+        <div className="md:w-1/2 mt-8 text-left">
+          <Table className="w-96 border border-black mx-auto">
+            <TableCaption>Report Summary</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]" colSpan={2}>
+                  Item
+                </TableHead>
+                <TableHead className="text-right">Rolls</TableHead>
+                <TableHead className="text-right">Pieces</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {results
+                ? Object.entries(results).map(([item, obj]) =>
+                    item !== "Total Rolls" && item !== "Total Pieces" ? (
+                      <TableRow key={item}>
+                        <TableCell className="font-medium" colSpan={2}>
+                          {item ? item : ""}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          {obj.rolls ? Math.round(obj.rolls * 10) / 10 : ""}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          {obj.pieces ? obj.pieces : ""}
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      ""
+                    )
                   )
-                )
-              : ""}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={2}>Total</TableCell>
-              <TableCell className="text-right">
-                {" "}
-                {results["Total Rolls"]
-                  ? Math.round(results["Total Rolls"] * 10) / 10
-                  : ""}
-              </TableCell>
-              <TableCell className="text-right">
-                {results["Total Pieces"] ? results["Total Pieces"] : ""}
-              </TableCell>
-            </TableRow>
-          </TableFooter>
-        </Table>
+                : ""}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={2}>Total</TableCell>
+                <TableCell className="text-right">
+                  {" "}
+                  {results["Total Rolls"]
+                    ? Math.round(results["Total Rolls"] * 10) / 10
+                    : ""}
+                </TableCell>
+                <TableCell className="text-right">
+                  {results["Total Pieces"] ? results["Total Pieces"] : ""}
+                </TableCell>
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </div>
       </div>
     </div>
   );
