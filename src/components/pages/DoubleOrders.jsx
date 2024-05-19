@@ -28,7 +28,7 @@ export default function DoubleOrders({ resultState, setResultState }) {
       reader.readAsText(fullFile);
     }
   };
-
+  
   useEffect(() => {
     if (!file) setResults({ 1: { noDoubles: "Please Upload File" } });
     else if (typeof file === "string" && file.trim().length > 0) {
@@ -56,7 +56,7 @@ export default function DoubleOrders({ resultState, setResultState }) {
       setResults(res);
       setResultState(res);
     }
-  }, [file]);
+  }, [file, setResultState]);
   
   return (
     <div className="mt-5 ">
