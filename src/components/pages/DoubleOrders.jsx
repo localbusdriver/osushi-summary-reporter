@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { FileUp, UserRound } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { 
   Card,
   CardContent,
@@ -17,9 +18,7 @@ export default function DoubleOrders({ resultState, setResultState }) {
 
   const handleFileChange = (e) => {
     const fullFile = e.target.files[0];
-    console.log("Reading File...");
     if (fullFile) {
-      console.log("File", true);
       const reader = new FileReader();
       reader.onload = (e) => {
         const text = e.target.result;
@@ -28,7 +27,14 @@ export default function DoubleOrders({ resultState, setResultState }) {
       reader.readAsText(fullFile);
     }
   };
-  
+
+  const clearContent = () => {
+    setFile({ 1: { noDoubles: "Please Upload File" } });
+    setResults({ 1: { noDoubles: "Please Upload File" } });
+    setResultState({ 1: { noDoubles: "Please Upload File" } });
+    document.getElementById("customFile").value = "";
+  }
+
   useEffect(() => {
     if (!file) setResults({ 1: { noDoubles: "Please Upload File" } });
     else if (typeof file === "string" && file.trim().length > 0) {
@@ -53,10 +59,15 @@ export default function DoubleOrders({ resultState, setResultState }) {
           };
         }
       });
+
+      if (Object.keys(res).length === 0) { 
+        res = { 1: { noDoubles: "No Double Orders" } };
+      }
+
       setResults(res);
       setResultState(res);
     }
-  }, [file, setResultState]);
+  }, [file]);
   
   return (
     <div className="mt-5 ">
@@ -77,6 +88,7 @@ export default function DoubleOrders({ resultState, setResultState }) {
             className="w-fit"
             onChange={handleFileChange}
           />
+          <Button className="w-20" onClick={clearContent}>Clear</Button>
         </div>
         <div className="md:w-1/2 mt-8 text-left ">
           <Card className="w-96">
